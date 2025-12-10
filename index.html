@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>IMISE PubMed-Generator</title>
+		<meta name="author" content="Konrad Höffner" />
+		<script type="module" src="js/pubmed.js"></script>
+		<style type="text/css">
+			.body {
+				width: auto;
+			}
+		</style>
+	</head>
+	<body>
+		<form id="mainform">
+			<label for="year">Jahr:</label>
+			<input id="year" name="year" type="number" min="1970" max="2099" step="1" value="2025" />
+			<label for="ag">Arbeitsgruppe:</label>
+			<select id="ag" name="ag">
+				<option value="magis">MaGIS</option>
+				<option value="top">TOP</option>
+			</select>
+			<button type="submit">Generieren</button>
+		</form>
+		<h2>Ergebnis</h2>
+		<span id="output"></span>
+	</body>
+</html>
