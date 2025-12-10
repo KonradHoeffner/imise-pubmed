@@ -7,6 +7,9 @@ export async function search(authors, year) {
 	let response = null;
 	let json = null;
 	try {
+		if (authors.length === 0) {
+			return `Keine Autoren vorhanden, bitte Arbeitsgruppe auswählen oder zusätzliche Autoren angeben.`;
+		}
 		const authorQuery = authors.map(([forename, surname]) => `${surname} ${forename}[au]`).join(" OR ");
 		const searchTerm = `(${authorQuery} AND ${year}[dp]`;
 		const url = `${ESEARCH_BASE}?db=pubmed&usehistory=y&term=${encodeURIComponent(searchTerm)}&retmode=json`;
@@ -74,8 +77,11 @@ else {
 		const formData = new FormData(event.target);
 		const year = formData.get("year");
 		const ag = formData.get("ag");
+		let authors = ags[ag];
+		const moreAuthors = formData.get("moreauthors").trim();
+		authors = authors.concat(moreAuthors.split("\n").map((a) => a.split(" ")));
 		const output = document.getElementById("output");
 		output.innerText = "Bitte warten...";
-		output.innerText = await search(ags[ag], year);
+		output.innerText = await search(authors, year);
 	});
 }

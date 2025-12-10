@@ -18,4 +18,5 @@ export default {
 		["Konrad", "Höffner"],
 		["Ralph", "Schäfermeier"],
 	],
+	keine: [],
 };
