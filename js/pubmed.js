@@ -47,7 +47,7 @@ async function citations(pmids) {
 		pubs = pubs.filter((p) => p.authors && p.source && p.pubdate);
 		//console.log(pubs);
 
-		return pubs.map(nlm).join("\n");
+		return pubs.map(nlm).sort().join("\n");
 	} catch (error) {
 		console.error("Error during citation generation", error);
 	}
