@@ -65,6 +65,11 @@ function nlm(p) {
 }
 
 const isNode = typeof process !== "undefined" && process.versions != null && process.versions.node != null;
+const MAP_UMLAUTS = true;
+const umlautMap = {
+  'ä': 'ae', 'ö': 'oe', 'ü': 'ue', 'ß': 'ss',
+  'Ä': 'Ae', 'Ö': 'Oe', 'Ü': 'Ue'
+};
 
 // local testing
 if (isNode) {
@@ -81,6 +86,13 @@ else {
 		let authors = ags[ag];
 		const moreAuthors = formData.get("moreauthors").trim();
 		authors = authors.concat(moreAuthors.split("\n").map((a) => a.split(" ")));
+		if(MAP_UMLAUTS)
+		{
+			const map = s => s.replace(/[äöüßÄÖÜ]/g, (match) => umlautMap[match]);
+			const aset = new Set([...authors,...authors.map(([forename, surname]) => [map(forename), map(surname)])]);
+			authors = Array.from(aset);
+			console.log(authors);
+		}
 		const output = document.getElementById("output");
 		output.innerText = "Bitte warten...";
 		output.innerText = await search(authors, year);
