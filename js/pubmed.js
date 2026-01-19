@@ -85,7 +85,7 @@ else {
 		const ag = formData.get("ag");
 		let authors = ags[ag];
 		const moreAuthors = formData.get("moreauthors").trim();
-		authors = authors.concat(moreAuthors.split("\n").map((a) => a.split(" ")));
+		if (moreAuthors) {authors = authors.concat(moreAuthors.split("\n").map((a) => a.split(" ")));}
 		if(MAP_UMLAUTS)
 		{
 			const map = s => s.replace(/[äöüßÄÖÜ]/g, (match) => umlautMap[match]);
