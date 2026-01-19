@@ -21,7 +21,13 @@ export async function search(authors, year) {
 		if (pmids.length === 0) {
 			return `Keine Publikationen gefunden für die Autoren ${authors.join(", ")} im Jahr ${year}`;
 		}
-		return await citations(pmids);
+		let c = await citations(pmids);
+		console.log(c);
+		for (const a of authors)
+		{
+			c = c.replaceAll(a[1],`<b>${a[1]}</b>`);
+		}
+		return c;
 	} catch (e) {
 		console.error("PUBMED Query error", e);
 		console.log("search term:", searchTerm);
