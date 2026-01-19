@@ -18,5 +18,18 @@ export default {
 		["Konrad", "Höffner"],
 		["Ralph", "Schäfermeier"],
 	],
+	cri: [
+		["Frank", "Meineke"],
+		["Markus", "Löffler"],
+		["René", "Hänsel"],
+		["Matthias", "Löbe"],
+		["Christina", "Lohr"],
+		["Franz", "Matthies"],
+		["Daniel", "Neumann"],
+		["Matthias", "Reusche"],
+		["Florian", "Schmidt"],
+		["Sebastian", "Stäubert"],
+		["Alexander", "Strübing"],
+	],
 	keine: [],
 };
