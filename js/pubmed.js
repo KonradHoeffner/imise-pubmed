@@ -47,7 +47,7 @@ async function citations(pmids) {
 		pubs = pubs.filter((p) => p.authors && p.source && p.pubdate);
 		//console.log(pubs);
 
-		return pubs.map(nlm).sort().join("\n");
+		return "<ol><li>"+pubs.map(nlm).sort().join("</li>\n<li>")+"</li></ol>";
 	} catch (error) {
 		console.error("Error during citation generation", error);
 	}
@@ -95,7 +95,7 @@ else {
 		}
 		const output = document.getElementById("output");
 		output.innerText = "Bitte warten...";
-		output.innerText = await search(authors, year);
+		output.innerHTML = await search(authors, year);
 	});
 	document.body.addEventListener("keydown", function(event) {if (event.ctrlKey && event.key === "Enter") {form.requestSubmit();}});
 }
