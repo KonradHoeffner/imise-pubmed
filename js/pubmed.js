@@ -47,7 +47,7 @@ async function citations(pmids) {
 		//const url = `${EFETCH_BASE}?db=pubmed&id=${idlist}&retmode=text&rettype=citation&api_key=${NCBI_API_KEY}`;
 		const response = await fetch(url);
 		const json = await response.json();
-		delete json.uids; // redundant array of UIDs, only element that is not a publicationobjec
+		delete json.uids; // redundant array of UIDs, only element that is not a publicationobject
 		let pubs = json.result;
 		pubs = Object.values(pubs);
 		pubs = pubs.filter((p) => p.authors && p.source && p.pubdate);
@@ -66,7 +66,8 @@ function nlm(p) {
 	// console.log(p.authors);
 	const authors = p.authors.map((a) => a.name).join(", ");
 	const eid = p.elocationid || "";
-	const s = `${authors}. ${p.title} ${p.source}. ${p.pubdate};${p.volume}:${p.pages}. ${eid}. PMID: ${p.uid}.`;
+	const s = `${authors}. <a target="_blank" href="https://pubmed.ncbi.nlm.nih.gov/${p.uid}/">${p.title}</a>
+						 ${p.source}. ${p.pubdate};${p.volume}:${p.pages}. ${eid}. PMID: ${p.uid}.`;
 	return s;
 }
 
