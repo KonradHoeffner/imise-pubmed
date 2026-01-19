@@ -1,7 +1,7 @@
 import ags from "./ag.js";
 // can be executed with node.js as well for testing
 
-/** */
+/** Search using Entrez® Programming Utilities ESearch, see https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESearch */
 export async function search(authors, year) {
 	const ESEARCH_BASE = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi";
 	let response = null;
@@ -22,7 +22,6 @@ export async function search(authors, year) {
 			return `Keine Publikationen gefunden für die Autoren ${authors.join(", ")} im Jahr ${year}`;
 		}
 		let c = await citations(pmids);
-		console.log(c);
 		for (const a of authors)
 		{
 			c = c.replaceAll(a[1],`<b>${a[1]}</b>`);
@@ -51,7 +50,6 @@ async function citations(pmids) {
 		let pubs = json.result;
 		pubs = Object.values(pubs);
 		pubs = pubs.filter((p) => p.authors && p.source && p.pubdate);
-		//console.log(pubs);
 
 		return "<ol><li>"+pubs.map(nlm).sort().join("</li>\n<li>")+"</li></ol>";
 	} catch (error) {
@@ -63,7 +61,6 @@ async function citations(pmids) {
 p: publication object as returned by esummary with return mode json.
 Details not found in <https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.ESummary>. */
 function nlm(p) {
-	// console.log(p.authors);
 	const authors = p.authors.map((a) => a.name).join(", ");
 	const eid = p.elocationid || "";
 	const s = `${authors}. <a target="_blank" href="https://pubmed.ncbi.nlm.nih.gov/${p.uid}/">${p.title}</a>
@@ -98,7 +95,6 @@ else {
 			const map = s => s.replace(/[äöüßÄÖÜ]/g, (match) => umlautMap[match]);
 			const aset = new Set([...authors,...authors.map(([forename, surname]) => [map(forename), map(surname)])]);
 			authors = Array.from(aset);
-			console.log(authors);
 		}
 		const output = document.getElementById("output");
 		output.innerText = "Bitte warten...";
