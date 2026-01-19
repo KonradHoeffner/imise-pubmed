@@ -72,7 +72,8 @@ if (isNode) {
 	console.log(await search(ags["magis"], 2025));
 } // production use in a browser
 else {
-	document.getElementById("mainform").addEventListener("submit", async (event) => {
+	const form = document.getElementById("mainform");
+	form.addEventListener("submit", async (event) => {
 		event.preventDefault();
 		const formData = new FormData(event.target);
 		const year = formData.get("year");
@@ -84,4 +85,5 @@ else {
 		output.innerText = "Bitte warten...";
 		output.innerText = await search(authors, year);
 	});
+	document.body.addEventListener("keydown", function(event) {if (event.ctrlKey && event.key === "Enter") {form.requestSubmit();}});
 }

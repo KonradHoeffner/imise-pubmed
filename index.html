@@ -14,19 +14,19 @@
 	</head>
 	<body>
 		<form id="mainform">
-			<label for="year">Jahr:</label>
-			<input id="year" name="year" type="number" min="1970" max="2099" step="1" value="2025" />
-			<label for="ag">Arbeitsgruppe:</label>
-			<select id="ag" name="ag">
+			<label for="year"><u>J</u>ahr:</label>
+			<input id="year" name="year" type="number" min="1970" max="2099" step="1" value="2025" accesskey="j"/>
+			<label for="ag" style="text-decoration-skip-ink: none;">Arbeits<u>g</u>ruppe:</label>
+			<select id="ag" name="ag" accesskey="g">
 				<option value="magis">MaGIS</option>
 				<option value="top">TOP</option>
 				<option value="cri">CRI</option>
 				<option value="keine">keine</option>
 			</select>
-			<label for="moreauthors">Zusätzliche Autoren je einer pro Zeile (Vorname Nachname)</label>
-			<textarea id="moreauthors" name="moreauthors"></textarea>
+			<label for="moreauthors">Zusätzliche <u>A</u>utoren je einer pro Zeile (Vorname Nachname)</label>
+			<textarea id="moreauthors" name="moreauthors" accesskey="a"></textarea>
 			<br />
-			<button type="submit">Generieren</button>
+			<button type="submit">Generieren (CTRL+Enter)</button>
 		</form>
 		<h2>Ergebnis</h2>
 		<span id="output"></span>
